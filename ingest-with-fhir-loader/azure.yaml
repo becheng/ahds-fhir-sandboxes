@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: fhir-ingest-sample
+hooks:
+  postprovision:
+    posix: # Only runs on Posix environmentsK
+    shell: sh
+    run: bash scripts/seedWithSynthea.bash
+    interactive: true
