@@ -22,11 +22,6 @@ param fhirServiceName string = 'fs${environmentName}${substring(toLower(uniqueSt
 @minLength(1)
 param syntheaJarPath string
 
-// @description('AzCopy SPN application ID')
-// @minLength(1)
-// @secure()
-// param azCopySpnApplicationId string
-
 @description('AzCopy SPN principal [object] ID')
 @minLength(1)
 param azCopySpnPrincipalId string
@@ -91,4 +86,3 @@ output AZCOPY_AUTO_LOGIN_TYPE string = 'SPN'
 output AZCOPY_SPN_OBJECT_ID string = azCopySpnPrincipalId
 output AZCOPY_TENANT_ID string = tenant().tenantId
 output SYNTHEA_JAR_PATH string = syntheaJarPath
-// output AZCOPY_SPA_APPLICATION_ID string = azCopySpnApplicationId
