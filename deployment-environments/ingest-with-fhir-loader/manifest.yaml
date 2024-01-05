@@ -6,24 +6,24 @@ description: Deploys a Azure Health Data Service FHIR Service with the OSS FHIR 
 runner: ARM
 templatePath: azuredeploy.json
 parameters:
-- id: environmentName
-  name: environmentName
+- id: "environmentName"
+  name: "environmentName"
   description: "Name of environment"
-  type: string
+  type: "string"
   required: true
-- id: location
-  name: location
+- id: "location"
+  name: "location"
   description: "Location of deployment"
-  type: string
+  type: "string"
   required: true
   defaultValue: "[resourceGroup().location]"
-- id: azCopySpnPrincipalId
+- id: "azCopySpnPrincipalId"
   name: "azCopySpnPrincipalId"
   description: "Service Principal ID to run AzCopy"
-  type: string
+  type: "string"
   required: true
-- id: syntheaJarPath
+- id: "syntheaJarPath"
   name: "syntheaJarPath"
   description: "Path to Synthea jar file"
-  type: string
+  type: "string"
   required: true
