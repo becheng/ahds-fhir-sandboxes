@@ -17,4 +17,4 @@ parameters:
   description: "Location of deployment"
   type: "string"
   required: true
-  defaultValue: "[resourceGroup().location]"
+  default: "[resourceGroup().location]"
