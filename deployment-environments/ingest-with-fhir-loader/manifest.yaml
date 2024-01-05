@@ -5,25 +5,3 @@ summary: Azure Web App Environment
 description: Deploys a Azure Health Data Service FHIR Service with the OSS FHIR Loader
 runner: ARM
 templatePath: azuredeploy.json
-parameters:
-- id: "environmentName"
-  name: "environmentName"
-  description: "Name of environment"
-  type: "string"
-  required: true
-- id: "location"
-  name: "location"
-  description: "Location of deployment"
-  type: "string"
-  required: true
-  defaultValue: "[resourceGroup().location]"
-- id: "azCopySpnPrincipalId"
-  name: "azCopySpnPrincipalId"
-  description: "Service Principal ID to run AzCopy"
-  type: "string"
-  required: true
-- id: "syntheaJarPath"
-  name: "syntheaJarPath"
-  description: "Path to Synthea jar file"
-  type: "string"
-  required: true
