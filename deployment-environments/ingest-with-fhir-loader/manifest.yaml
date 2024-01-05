@@ -12,3 +12,9 @@ parameters:
   description: "Name of environment"
   type: "string"
   required: true
+- id: "location"
+  name: "location"
+  description: "Location of deployment"
+  type: "string"
+  required: true
+  defaultValue: "[resourceGroup().location]"
