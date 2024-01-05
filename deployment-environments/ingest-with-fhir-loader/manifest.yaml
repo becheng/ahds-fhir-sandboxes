@@ -17,7 +17,9 @@ parameters:
   description: "Location of deployment"
   type: "string"
   required: false
-  default: "[resourceGroup().location]"
+  allowed:
+    - "canadacentral"
+  default: "canadacentral"
 - id: "resourceGroupName"
   name: "resourceGroupName"
   description: "Name of resource group"
@@ -32,4 +34,4 @@ parameters:
   name: "syntheaJarPath"
   description: "Path to Synthea jar file"
   type: "string"
-  required: true
+  required: false
