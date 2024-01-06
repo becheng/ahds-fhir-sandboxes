@@ -10,7 +10,7 @@ param environmentName string
 param location string
 
 @description('Name of the resource group')
-param resourceGroupName string
+param resourceGroupName string = ''
 
 @description('Name of the ADHS workspace')
 param adhsWorkspaceName string = 'ws${environmentName}${substring(toLower(uniqueString(subscription().id, environmentName, location)),0,7)}'
