@@ -19,11 +19,6 @@ parameters:
   required: false
   allowed:
     - "canadacentral"
-- id: "resourceGroupName"
-  name: "resourceGroupName"
-  description: "Name of resource group"
-  type: "string"
-  required: false
 - id: "azCopySpnPrincipalId"
   name: "azCopySpnPrincipalId"
   description: "Service Principal ID to run AzCopy"
