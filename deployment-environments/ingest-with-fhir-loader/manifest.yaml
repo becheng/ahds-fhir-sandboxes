@@ -19,7 +19,6 @@ parameters:
   required: false
   allowed:
     - "canadacentral"
-  default: "canadacentral"
 - id: "resourceGroupName"
   name: "resourceGroupName"
   description: "Name of resource group"
