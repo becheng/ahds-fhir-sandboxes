@@ -23,14 +23,10 @@ parameters:
   name: "resourceGroupName"
   description: "Name of resource group [use the same name as {project name}-{instance name}]"
   type: "string"
-  required: true
+  required: false
+  default: "[resourceGroup().name]"
 - id: "azCopySpnPrincipalId"
   name: "azCopySpnPrincipalId"
   description: "Service Principal ID to run AzCopy"
   type: "string"
   required: true
-- id: "syntheaJarPath"
-  name: "syntheaJarPath"
-  description: "Path to Synthea jar file"
-  type: "string"
-  required: false
