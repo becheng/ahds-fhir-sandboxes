@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.24.24.22086",
-      "templateHash": "10669103009829087129"
+      "templateHash": "5921346968035826416"
     }
   },
   "parameters": {
@@ -205,17 +205,10 @@
   },
   "resources": [
     {
-      "type": "Microsoft.Resources/resourceGroups",
-      "apiVersion": "2021-04-01",
-      "name": "[if(not(empty(parameters('resourceGroupName'))), parameters('resourceGroupName'), format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName')))]",
-      "location": "[parameters('location')]",
-      "tags": "[variables('tags')]"
-    },
-    {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "fhirService",
-      "resourceGroup": "[if(not(empty(parameters('resourceGroupName'))), parameters('resourceGroupName'), format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName')))]",
+      "resourceGroup": "[parameters('resourceGroupName')]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
@@ -319,16 +312,13 @@
             }
           }
         }
-      },
-      "dependsOn": [
-        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', if(not(empty(parameters('resourceGroupName'))), parameters('resourceGroupName'), format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName'))))]"
-      ]
+      }
     },
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "ossFhirLoader",
-      "resourceGroup": "[if(not(empty(parameters('resourceGroupName'))), parameters('resourceGroupName'), format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName')))]",
+      "resourceGroup": "[parameters('resourceGroupName')]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
@@ -339,7 +329,7 @@
             "value": "[format('{0}/{1}', parameters('adhsWorkspaceName'), parameters('fhirServiceName'))]"
           },
           "fhirServiceId": {
-            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, if(not(empty(parameters('resourceGroupName'))), parameters('resourceGroupName'), format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName')))), 'Microsoft.Resources/deployments', 'fhirService'), '2022-09-01').outputs.fhirServiceId.value]"
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'fhirService'), '2022-09-01').outputs.fhirServiceId.value]"
           }
         },
         "template": {
@@ -938,15 +928,14 @@
         }
       },
       "dependsOn": [
-        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, if(not(empty(parameters('resourceGroupName'))), parameters('resourceGroupName'), format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName')))), 'Microsoft.Resources/deployments', 'fhirService')]",
-        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', if(not(empty(parameters('resourceGroupName'))), parameters('resourceGroupName'), format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName'))))]"
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'fhirService')]"
       ]
     },
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "azCopySPNRoleAssignment",
-      "resourceGroup": "[if(not(empty(parameters('resourceGroupName'))), parameters('resourceGroupName'), format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName')))]",
+      "resourceGroup": "[parameters('resourceGroupName')]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
@@ -954,7 +943,7 @@
         "mode": "Incremental",
         "parameters": {
           "storageAccountName": {
-            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, if(not(empty(parameters('resourceGroupName'))), parameters('resourceGroupName'), format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName')))), 'Microsoft.Resources/deployments', 'ossFhirLoader'), '2022-09-01').outputs.storageAccountName.value]"
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'ossFhirLoader'), '2022-09-01').outputs.storageAccountName.value]"
           },
           "principalId": {
             "value": "[parameters('azCopySpnPrincipalId')]"
@@ -1003,8 +992,7 @@
         }
       },
       "dependsOn": [
-        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, if(not(empty(parameters('resourceGroupName'))), parameters('resourceGroupName'), format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName')))), 'Microsoft.Resources/deployments', 'ossFhirLoader')]",
-        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', if(not(empty(parameters('resourceGroupName'))), parameters('resourceGroupName'), format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName'))))]"
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'ossFhirLoader')]"
       ]
     }
   ],
@@ -1019,7 +1007,7 @@
     },
     "STORAGE_ACCOUNT_NAME": {
       "type": "string",
-      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, if(not(empty(parameters('resourceGroupName'))), parameters('resourceGroupName'), format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName')))), 'Microsoft.Resources/deployments', 'ossFhirLoader'), '2022-09-01').outputs.storageAccountName.value]"
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'ossFhirLoader'), '2022-09-01').outputs.storageAccountName.value]"
     },
     "AZCOPY_AUTO_LOGIN_TYPE": {
       "type": "string",

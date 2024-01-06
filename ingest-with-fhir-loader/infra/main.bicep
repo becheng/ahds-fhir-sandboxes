@@ -36,10 +36,14 @@ var tags = {
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 
 // Organize resources in a resource group
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: !empty(resourceGroupName) ? resourceGroupName : '${abbrs.resourcesResourceGroups}${environmentName}'
-  location: location
-  tags: tags
+// resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+//   name: !empty(resourceGroupName) ? resourceGroupName : '${abbrs.resourcesResourceGroups}${environmentName}'
+//   location: location
+//   tags: tags
+// }
+
+resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = {
+  name: resourceGroupName
 }
 
 // Create a fhir service
