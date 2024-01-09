@@ -1,2 +1,3 @@
 .azure
 output
+mainForARMGen.bicep

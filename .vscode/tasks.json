@@ -1,0 +1,36 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Ingest: 1-copy-main.bicep",
+            "type": "shell",
+            "command": "cp main.bicep mainForARMGen.bicep",
+            "options": {
+                "cwd": "${workspaceFolder}/ingest-with-fhir-loader/infra"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Ingest: 2-update resource group",
+            "type": "shell",
+            "command": "sed -i -e \"/^resource[[:space:]]rg[[:space:]]'Microsoft.Resources\\/resourceGroups/,/^}/ s/./\\/\\/ &/\" -e \"/^\\/\\/[[:space:]]resource[[:space:]]rg[[:space:]]'Microsoft.Resources\\/resourceGroups/ s/./resource rg \\'Microsoft.Resources\\/resourceGroups@2021-04-01\\' existing = \\{\\n  name: resourceGroupName\\n\\}\\\\n&/\" mainForARMGen.bicep",
+            "options": {
+                "cwd": "${workspaceFolder}/ingest-with-fhir-loader/infra"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Ingest: Generate ARM template",
+            "type": "shell",
+            "command": "az bicep build --file ingest-with-fhir-loader/infra/mainForARMGen.bicep --outfile deployment-environments/ingest-with-fhir-loader/azuredeploy.json",
+            "dependsOrder": "sequence",
+            "dependsOn": ["Ingest: 1-copy-main.bicep", "Ingest: 2-update resource group"],            
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        }
+    ]
+}
