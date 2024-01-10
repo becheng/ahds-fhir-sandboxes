@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.24.24.22086",
-      "templateHash": "8566322288775810202"
+      "templateHash": "12397261705175823024"
     }
   },
   "parameters": {
@@ -47,7 +47,6 @@
     },
     "syntheaJarPath": {
       "type": "string",
-      "minLength": 1,
       "metadata": {
         "description": "Path of the synthea jar file"
       }
@@ -330,6 +329,9 @@
           },
           "fhirServiceId": {
             "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'fhirService2'), '2022-09-01').outputs.fhirServiceId.value]"
+          },
+          "location": {
+            "value": "[reference(subscriptionResourceId('Microsoft.Resources/resourceGroups', parameters('resourceGroupName')), '2021-04-01', 'full').location]"
           }
         },
         "template": {
@@ -339,7 +341,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.24.24.22086",
-              "templateHash": "7056410229115472825"
+              "templateHash": "15360444997869629620"
             }
           },
           "parameters": {
@@ -857,7 +859,7 @@
                     "_generator": {
                       "name": "bicep",
                       "version": "0.24.24.22086",
-                      "templateHash": "6639061938027142896"
+                      "templateHash": "14728762075198134895"
                     }
                   },
                   "parameters": {
@@ -876,10 +878,6 @@
                     "principalType": {
                       "type": "string",
                       "defaultValue": "ServicePrincipal"
-                    },
-                    "subscriptionId": {
-                      "type": "string",
-                      "defaultValue": "[subscription().subscriptionId]"
                     }
                   },
                   "variables": {
@@ -894,7 +892,7 @@
                       "scope": "[format('Microsoft.HealthcareApis/workspaces/{0}/fhirservices/{1}', split(concat(variables('fhirUrlCleanSplit')[0], '/', join(skip(variables('fhirUrlCleanSplit'), 1), '-')), '/')[0], split(concat(variables('fhirUrlCleanSplit')[0], '/', join(skip(variables('fhirUrlCleanSplit'), 1), '-')), '/')[1])]",
                       "name": "[guid(parameters('principalId'), resourceId('Microsoft.HealthcareApis/workspaces/fhirservices', split(concat(variables('fhirUrlCleanSplit')[0], '/', join(skip(variables('fhirUrlCleanSplit'), 1), '-')), '/')[0], split(concat(variables('fhirUrlCleanSplit')[0], '/', join(skip(variables('fhirUrlCleanSplit'), 1), '-')), '/')[1]), parameters('fhirContributorRoleAssignmentId'))]",
                       "properties": {
-                        "roleDefinitionId": "[format('/subscriptions/{0}/providers/Microsoft.Authorization/roleDefinitions/{1}', parameters('subscriptionId'), parameters('fhirContributorRoleAssignmentId'))]",
+                        "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', parameters('fhirContributorRoleAssignmentId'))]",
                         "principalId": "[parameters('principalId')]",
                         "principalType": "[parameters('principalType')]"
                       }
@@ -906,7 +904,7 @@
                       "scope": "[format('Microsoft.HealthcareApis/services/{0}', variables('fhirUrlClean'))]",
                       "name": "[guid(parameters('principalId'), resourceId('Microsoft.HealthcareApis/services', variables('fhirUrlClean')), parameters('fhirContributorRoleAssignmentId'))]",
                       "properties": {
-                        "roleDefinitionId": "[format('/subscriptions/{0}/providers/Microsoft.Authorization/roleDefinitions/{1}', parameters('subscriptionId'), parameters('fhirContributorRoleAssignmentId'))]",
+                        "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', parameters('fhirContributorRoleAssignmentId'))]",
                         "principalId": "[parameters('principalId')]",
                         "principalType": "[parameters('principalType')]"
                       }
@@ -926,10 +924,7 @@
             }
           }
         }
-      },
-      "dependsOn": [
-        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'fhirService2')]"
-      ]
+      }
     },
     {
       "type": "Microsoft.Resources/deployments",

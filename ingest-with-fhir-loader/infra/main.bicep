@@ -19,7 +19,7 @@ param adhsWorkspaceName string = 'ws${environmentName}${substring(toLower(unique
 param fhirServiceName string = 'fs${environmentName}${substring(toLower(uniqueString(subscription().id, environmentName, location)),0,7)}'
 
 @description('Path of the synthea jar file')
-param syntheaJarPath string = ''
+param syntheaJarPath string
 
 @description('AzCopy SPN principal [object] ID')
 @minLength(1)
@@ -42,8 +42,8 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 }
 
 // Create a fhir service
-module fhirService 'core/adhs/fhir.bicep' = {
-  name: 'fhirService'
+module fhirService 'core/ahds/fhir.bicep' = {
+  name: 'fhirService2'
   scope: rg
   params: {
     workspaceName: !empty(adhsWorkspaceName) ? adhsWorkspaceName : 'ws${environmentName}${resourceToken}'
@@ -63,6 +63,7 @@ module ossFhirLoader 'core/oss-fhir-loader/fhirBulkImport.bicep' = {
   params: {
     fhirServiceName: '${adhsWorkspaceName}/${fhirServiceName}'
     fhirServiceId: fhirService.outputs.fhirServiceId
+    location: rg.location
   }
 }
 
