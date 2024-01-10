@@ -19,7 +19,7 @@ param adhsWorkspaceName string = 'ws${environmentName}${substring(toLower(unique
 param fhirServiceName string = 'fs${environmentName}${substring(toLower(uniqueString(subscription().id, environmentName, location)),0,7)}'
 
 @description('Path of the synthea jar file')
-param syntheaJarPath string
+param syntheaJarPath string = ''
 
 @description('AzCopy SPN principal [object] ID')
 @minLength(1)
