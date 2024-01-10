@@ -925,7 +925,10 @@
             }
           }
         }
-      }
+      },
+      "dependsOn": [
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'fhirService2')]"
+      ]
     },
     {
       "type": "Microsoft.Resources/deployments",
