@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.24.24.22086",
-      "templateHash": "680435829460993850"
+      "templateHash": "8566322288775810202"
     }
   },
   "parameters": {
@@ -47,7 +47,7 @@
     },
     "syntheaJarPath": {
       "type": "string",
-      "defaultValue": "",
+      "minLength": 1,
       "metadata": {
         "description": "Path of the synthea jar file"
       }

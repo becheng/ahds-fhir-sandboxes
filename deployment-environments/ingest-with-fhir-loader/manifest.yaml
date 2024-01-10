@@ -30,3 +30,8 @@ parameters:
   description: "Service Principal ID to run AzCopy"
   type: "string"
   required: true
+- id: "syntheaJarPath"
+  name: "syntheaJarPath"
+  description: "Path to Synthea jar file"
+  type: "string"
+  required: true
