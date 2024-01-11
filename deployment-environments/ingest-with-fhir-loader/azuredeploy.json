@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.24.24.22086",
-      "templateHash": "2668371366614282263"
+      "templateHash": "15651783257451285473"
     }
   },
   "parameters": {
@@ -207,7 +207,7 @@
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
-      "name": "fhirService2",
+      "name": "fhirService",
       "resourceGroup": "[parameters('resourceGroupName')]",
       "properties": {
         "expressionEvaluationOptions": {
@@ -329,7 +329,7 @@
             "value": "[format('{0}/{1}', parameters('adhsWorkspaceName'), parameters('fhirServiceName'))]"
           },
           "fhirServiceId": {
-            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'fhirService2'), '2022-09-01').outputs.fhirServiceId.value]"
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'fhirService'), '2022-09-01').outputs.fhirServiceId.value]"
           },
           "location": {
             "value": "[reference(subscriptionResourceId('Microsoft.Resources/resourceGroups', parameters('resourceGroupName')), '2021-04-01', 'full').location]"
@@ -927,7 +927,7 @@
         }
       },
       "dependsOn": [
-        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'fhirService2')]"
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'fhirService')]"
       ]
     },
     {

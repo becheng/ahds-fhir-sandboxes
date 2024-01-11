@@ -35,7 +35,7 @@ var tags = {
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 
 // Organize resources in a resource group
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+resource rg 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: !empty(resourceGroupName) ? resourceGroupName : '${abbrs.resourcesResourceGroups}${environmentName}'
   location: location
   tags: tags
@@ -43,7 +43,7 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 
 // Create a fhir service
 module fhirService 'core/ahds/fhir.bicep' = {
-  name: 'fhirService2'
+  name: 'fhirService'
   scope: rg
   params: {
     workspaceName: !empty(adhsWorkspaceName) ? adhsWorkspaceName : 'ws${environmentName}${resourceToken}'
