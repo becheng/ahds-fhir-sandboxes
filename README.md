@@ -5,7 +5,8 @@ This repository contains Azure Developer CLI (azd) templates to deploy Azure Hea
 Each scenario contains detailed setup instructions.
 
 ## Prerequistes for all Scenarios
-* [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/about) or a Linux distribution 
+* [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/about) or a Linux distribution
+* [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt) 
 * [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd?tabs=winget-windows%2Cbrew-mac%2Cscript-linux&pivots=os-linux)
 * [Visual Studio Code](https://code.visualstudio.com/download)
 * Make sure you have this repository cloned and up to date on your local system.
